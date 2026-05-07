@@ -11,14 +11,14 @@ import {
 import { auth } from "@/lib/api";
 
 const navItems = [
-  { label: "Dashboard", href: "./dashboard", icon: LayoutDashboard },
-  { label: "Étudiants", href: "./students", icon: Users },
-  { label: "Enseignants", href: "./teachers", icon: UserCheck },
-  { label: "Classes", href: "./classes", icon: BookOpen },
-  { label: "Inscriptions", href: "./registrations", icon: FileText },
-  { label: "Absences", href: "./absences", icon: Calendar },
-  { label: "Notes & Bulletins", href: "./grades", icon: Award },
-  { label: "Paramètres", href: "./settings", icon: Settings },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Étudiants", href: "/students", icon: Users },
+  { label: "Enseignants", href: "/teachers", icon: UserCheck },
+  { label: "Classes", href: "/classes", icon: BookOpen },
+  { label: "Inscriptions", href: "/registrations", icon: FileText },
+  { label: "Absences", href: "/absences", icon: Calendar },
+  { label: "Notes & Bulletins", href: "/grades", icon: Award },
+  { label: "Paramètres", href: "/settings", icon: Settings },
 ];
 
 interface SidebarProps {
@@ -36,7 +36,7 @@ export default function DashboardLayout({ children }: SidebarProps) {
     router.push("/");
   };
 
-  const currentModule = navItems.find((n) => pathname.includes(n.href.replace("./", "")));
+  const currentModule = navItems.find((n) => pathname.startsWith(n.href));
 
   return (
     <div className="min-h-screen bg-slate-50 flex">
@@ -75,7 +75,7 @@ export default function DashboardLayout({ children }: SidebarProps) {
           {/* Navigation */}
           <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
             {navItems.map((item) => {
-              const isActive = pathname.includes(item.href.replace("./", ""));
+              const isActive = pathname.startsWith(item.href);
               const Icon = item.icon;
               
               return (

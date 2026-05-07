@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Optional
 from uuid import UUID
 from app.core.database import get_db
-from app.core.security import get_current_user
+from app.api.v1.auth import get_current_user
 from app.models.models import User, SchoolClass, Subject, Teaching, Teacher
 from app.schemas import ClassCreate, ClassUpdate, ClassResponse, SubjectCreate, SubjectUpdate, SubjectResponse, PaginatedResponse
 from sqlalchemy import desc

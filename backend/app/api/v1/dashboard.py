@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.core.database import get_db
-from app.core.security import get_current_user
+from app.api.v1.auth import get_current_user
 from app.models.models import User, Student, Teacher, SchoolClass, Registration, Absence, Grade, RegistrationStatus
 from app.schemas import DashboardKPIs
 from sqlalchemy import func, desc
@@ -13,7 +13,7 @@ import json
 router = APIRouter()
 
 
-@router.get("/dashboard/kpis", response_model=dict)
+@router.get("/kpis", response_model=dict)
 def get_dashboard_kpis(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     # Total students
     total_students = db.query(Student).filter(Student.status == "active").count()
@@ -53,7 +53,7 @@ def get_dashboard_kpis(db: Session = Depends(get_db), current_user: User = Depen
     }
 
 
-@router.get("/dashboard/charts", response_model=dict)
+@router.get("/charts", response_model=dict)
 def get_dashboard_charts(
     period: str = "month",
     db: Session = Depends(get_db),
